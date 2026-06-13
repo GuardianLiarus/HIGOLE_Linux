@@ -11,7 +11,7 @@ echo $'ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"' | sudo tee \
     /etc/udev/rules.d/99-gole2pro-touch.rules
 ```
 
-## Fix for invertet accelerometer
+## Fix for inverted accelerometer
 
 ```
 echo $'ENV{ACCEL_MOUNT_MATRIX}="0, -1, 0; -1, 0, 0; 0, 0, 1"' | sudo tee \
