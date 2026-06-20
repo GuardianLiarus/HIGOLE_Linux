@@ -56,4 +56,4 @@ Edit the file     /usr/share/alsa-card-profile/mixer/paths/analog-output-speaker
 switch = mute
 volume = merge
 ```
-If you on Immutable Distro like Fedora Silverblue, you can copy analog-output-speaker.conf to ~/.config/alsa-card-profile/mixer/paths/analog-output-speaker.conf and edit.
+If you are on an immutable distribution such as Fedora Silverblue or Bazzite, you can copy analog-output-speaker.conf to ~/.config/alsa-card-profile/mixer/paths/analog-output-speaker.conf and edit it there.
