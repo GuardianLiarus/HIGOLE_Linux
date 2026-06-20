@@ -6,6 +6,7 @@ Guide to fix the issues with the very cool handheld device that came originally 
 This guide is a work in progress, feel free to contribute!
 
 ## X11 Setup (Currently working)
+⚠️ The screen rotation part will work only with OpenRC init systems
 
 ### Fix for the inverted Touchscreen input
 
