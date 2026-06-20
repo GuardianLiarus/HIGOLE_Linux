@@ -6,20 +6,22 @@ Guide to fix the issues with the very cool handheld device when running modern L
 This guide is a work in progress, feel free to contribute!
 
 ## X11 Setup (Currently working)
-⚠️ The screen rotation part will work only with OpenRC init systems
 
 ### Fix to get the auto screen rotation working
-```
-echo $'#!/sbin/openrc-run\ncommand=/usr/lib/iio-sensor-proxy\ncommand_background=yes\npidfile=/run/iio-sensor-proxy.pid\ndepend() {\n\tneed dbus localmount\n}' | sudo tee /etc/init.d/iio-sensor-proxy
-```
+
+- Install ``iio-sensors-proxy`` with your package manager
+- Install ``screenrotator-git`` (available in the AUR, package is deprecated, and PKGBUILD might need manual editing)
+- Add Screen Rotator to startup programs, and reboot.
 
 ### Fix for the inverted accelerometer (inverted screen rotation)
+Creates a udev rule ``/etc/udev/rules.d/99-gole2pro-accel.rules``
 ```
 echo $'ENV{ACCEL_MOUNT_MATRIX}="0, -1, 0; -1, 0, 0; 0, 0, 1"' | sudo tee \
     /etc/udev/rules.d/99-gole2pro-accel.rules
 ```
 
 ### Fix for the inverted Touchscreen input
+Creates a udev rule ``/etc/udev/rules.d/99-gole2pro-touch.rules``
 ```
 echo $'ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"' | sudo tee \
     /etc/udev/rules.d/99-gole2pro-touch.rules
@@ -35,15 +37,17 @@ volume = merge
 If you are on an immutable distribution such as Fedora Silverblue or Bazzite, you can copy analog-output-speaker.conf to ~/.config/alsa-card-profile/mixer/paths/analog-output-speaker.conf and edit it there.
 
 
-## Wayland Setup (Broken at the moment)
+## Wayland Setup (Touch is broken at the moment)
 
-### Fix for the inverted Touchscreen input (Currently broken, see [libinput#1298](https://gitlab.freedesktop.org/libinput/libinput/-/work_items/1298))
+### Fix for the inverted Touchscreen input(Currently broken, see [libinput#1298](https://gitlab.freedesktop.org/libinput/libinput/-/work_items/1298))
+Creates a udev rule ``/etc/udev/rules.d/99-gole2pro-touch.rules``
 ```
 echo $'ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"' | sudo tee \
     /etc/udev/rules.d/99-gole2pro-touch.rules
 ```
 
 ### Fix for the inverted accelerometer (inverted screen rotation)
+Creates a udev rule ``/etc/udev/rules.d/99-gole2pro-accel.rules``
 ```
 echo $'ENV{ACCEL_MOUNT_MATRIX}="0, -1, 0; -1, 0, 0; 0, 0, 1"' | sudo tee \
     /etc/udev/rules.d/99-gole2pro-accel.rules
