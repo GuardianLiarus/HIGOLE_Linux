@@ -28,7 +28,7 @@ echo $'ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"' | sudo tee \
 ```
 
 ### Fix to get the internal speaker working
-Edit the file     /usr/share/alsa-card-profile/mixer/paths/analog-output-speaker.conf and change this lines: 
+Edit the file ``/usr/share/alsa-card-profile/mixer/paths/analog-output-speaker.conf`` and change this lines: 
 ```
 [Element Headphone]
 switch = mute
@@ -54,7 +54,7 @@ echo $'ENV{ACCEL_MOUNT_MATRIX}="0, -1, 0; -1, 0, 0; 0, 0, 1"' | sudo tee \
 ```
 
 ### Fix to get the internal speaker working
-Edit the file     /usr/share/alsa-card-profile/mixer/paths/analog-output-speaker.conf and change this lines: 
+Edit the file ``/usr/share/alsa-card-profile/mixer/paths/analog-output-speaker.conf`` and change this lines: 
 ```
 [Element Headphone]
 switch = mute
