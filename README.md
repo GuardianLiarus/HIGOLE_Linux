@@ -8,57 +8,49 @@ This guide is a work in progress, feel free to contribute!
 ## X11 Setup (Currently working)
 ⚠️ The screen rotation part will work only with OpenRC init systems
 
-### Fix for the inverted Touchscreen input
-
+### Fix to get the auto screen rotation working
 ```
-echo $'ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"' | sudo tee \
-    /etc/udev/rules.d/99-gole2pro-touch.rules
+echo $'#!/sbin/openrc-run\ncommand=/usr/lib/iio-sensor-proxy\ncommand_background=yes\npidfile=/run/iio-sensor-proxy.pid\ndepend() {\n\tneed dbus localmount\n}' | sudo tee /etc/init.d/iio-sensor-proxy
 ```
 
 ### Fix for the inverted accelerometer (inverted screen rotation)
-
 ```
 echo $'ENV{ACCEL_MOUNT_MATRIX}="0, -1, 0; -1, 0, 0; 0, 0, 1"' | sudo tee \
     /etc/udev/rules.d/99-gole2pro-accel.rules
 ```
 
+### Fix for the inverted Touchscreen input
+```
+echo $'ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"' | sudo tee \
+    /etc/udev/rules.d/99-gole2pro-touch.rules
+```
+
 ### Fix to get the internal speaker working
-
-edit the file     /usr/share/alsa-card-profile/mixer/paths/analog-output-speaker.conf and change this lines: 
-
+Edit the file     /usr/share/alsa-card-profile/mixer/paths/analog-output-speaker.conf and change this lines: 
 ```
 [Element Headphone]
 switch = mute
 volume = merge
 ```
-If you on Immutable Distro like Fedora Silverblue, you can copy analog-output-speaker.conf to ~/.config/alsa-card-profile/mixer/paths/analog-output-speaker.conf and edit.
+If you are on an immutable distribution such as Fedora Silverblue or Bazzite, you can copy analog-output-speaker.conf to ~/.config/alsa-card-profile/mixer/paths/analog-output-speaker.conf and edit it there.
 
-### Fix to get the auto screen rotation working
-
-```
-echo $'#!/sbin/openrc-run\ncommand=/usr/lib/iio-sensor-proxy\ncommand_background=yes\npidfile=/run/iio-sensor-proxy.pid\ndepend() {\n\tneed dbus localmount\n}' | sudo tee /etc/init.d/iio-sensor-proxy
-```
 
 ## Wayland Setup (Broken at the moment)
 
 ### Fix for the inverted Touchscreen input (Currently broken, see [libinput#1298](https://gitlab.freedesktop.org/libinput/libinput/-/work_items/1298))
-
 ```
 echo $'ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"' | sudo tee \
     /etc/udev/rules.d/99-gole2pro-touch.rules
 ```
 
 ### Fix for the inverted accelerometer (inverted screen rotation)
-
 ```
 echo $'ENV{ACCEL_MOUNT_MATRIX}="0, -1, 0; -1, 0, 0; 0, 0, 1"' | sudo tee \
     /etc/udev/rules.d/99-gole2pro-accel.rules
 ```
 
 ### Fix to get the internal speaker working
-
-edit the file     /usr/share/alsa-card-profile/mixer/paths/analog-output-speaker.conf and change this lines: 
-
+Edit the file     /usr/share/alsa-card-profile/mixer/paths/analog-output-speaker.conf and change this lines: 
 ```
 [Element Headphone]
 switch = mute
