@@ -5,9 +5,14 @@ Guide to fix the issues with the very cool handheld device when running modern L
 
 This guide is a work in progress, feel free to contribute!
 
+**OS Specific notes:**
+This guide was tested on [CachyOS](https://cachyos.org/), [Fedora KDE](https://fedoraproject.org/kde/) and [Linux Mint](https://www.linuxmint.com/)
+
+
 ## X11 Setup (Currently working)
 
 ### Fix to get the auto screen rotation working
+*Not needed for Linux Mint's x11 session, you will however need to Disable automatic screen rotation in the display settings, somehow that makes it work*
 
 - Install ``iio-sensors-proxy`` with your package manager
 - Install ``screenrotator-git`` (available in the AUR, package is deprecated, and PKGBUILD might need manual editing)
