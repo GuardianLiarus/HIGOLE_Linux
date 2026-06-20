@@ -38,7 +38,7 @@ If you on Immutable Distro like Fedora Silverblue, you can copy analog-output-sp
 echo $'#!/sbin/openrc-run\ncommand=/usr/lib/iio-sensor-proxy\ncommand_background=yes\npidfile=/run/iio-sensor-proxy.pid\ndepend() {\n\tneed dbus localmount\n}' | sudo tee /etc/init.d/iio-sensor-proxy
 ```
 
-## Wayland Setup (Broken for the moment)
+## Wayland Setup (Broken at the moment)
 
 ### Fix for the inverted Touchscreen input (Currently broken, see [libinput#1298](https://gitlab.freedesktop.org/libinput/libinput/-/work_items/1298))
 
