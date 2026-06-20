@@ -1,4 +1,4 @@
-#HIGOLE - Linux
+# HIGOLE - Linux
 [HIGOLE GOLE 2 Pro](https://goleminipc.com/de/products/higole-gole-2-pro-mini-pc-windows-11-pro-intel-celeron-n5095-16gb-lpddr4-256gb-rom) Linux Setup.
 
 Guide to fix the issues with the very cool handheld device when running modern Linux, this is an updated guide based on [JohnJayMcKaye's guide](https://github.com/JohnJayMcKaye/HIGOLA)
