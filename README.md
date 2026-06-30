@@ -8,6 +8,31 @@ This guide is a work in progress, feel free to contribute!
 **OS Specific notes:**
 This guide was tested on [CachyOS](https://cachyos.org/), [Fedora KDE](https://fedoraproject.org/kde/) and [Linux Mint](https://www.linuxmint.com/)
 
+## Wayland Setup
+
+### Fix for the inverted Touchscreen input (Currently broken on KDE, see [Bug 521464](https://bugs.kde.org/show_bug.cgi?id=521464))
+Creates a udev rule ``/etc/udev/rules.d/99-gole2pro-touch.rules``
+```
+echo $'ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"' | sudo tee \
+    /etc/udev/rules.d/99-gole2pro-touch.rules
+```
+
+### Fix for the inverted accelerometer (inverted screen rotation)
+Creates a udev rule ``/etc/udev/rules.d/99-gole2pro-accel.rules``
+```
+echo $'ENV{ACCEL_MOUNT_MATRIX}="0, -1, 0; -1, 0, 0; 0, 0, 1"' | sudo tee \
+    /etc/udev/rules.d/99-gole2pro-accel.rules
+```
+
+### Fix to get the internal speaker working
+Edit the file ``/usr/share/alsa-card-profile/mixer/paths/analog-output-speaker.conf`` and change this lines: 
+```
+[Element Headphone]
+switch = mute
+volume = merge
+```
+If you are on an immutable distribution such as Fedora Silverblue or Bazzite, you can copy analog-output-speaker.conf to ~/.config/alsa-card-profile/mixer/paths/analog-output-speaker.conf and edit it there.
+
 
 ## X11 Setup (Currently working)
 
@@ -30,32 +55,6 @@ Creates a udev rule ``/etc/udev/rules.d/99-gole2pro-touch.rules``
 ```
 echo $'ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"' | sudo tee \
     /etc/udev/rules.d/99-gole2pro-touch.rules
-```
-
-### Fix to get the internal speaker working
-Edit the file ``/usr/share/alsa-card-profile/mixer/paths/analog-output-speaker.conf`` and change this lines: 
-```
-[Element Headphone]
-switch = mute
-volume = merge
-```
-If you are on an immutable distribution such as Fedora Silverblue or Bazzite, you can copy analog-output-speaker.conf to ~/.config/alsa-card-profile/mixer/paths/analog-output-speaker.conf and edit it there.
-
-
-## Wayland Setup (Touch is broken at the moment)
-
-### Fix for the inverted Touchscreen input (Currently broken on GNOME and KDE, see [Bug 521464](https://bugs.kde.org/show_bug.cgi?id=521464) for KDE)
-Creates a udev rule ``/etc/udev/rules.d/99-gole2pro-touch.rules``
-```
-echo $'ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"' | sudo tee \
-    /etc/udev/rules.d/99-gole2pro-touch.rules
-```
-
-### Fix for the inverted accelerometer (inverted screen rotation)
-Creates a udev rule ``/etc/udev/rules.d/99-gole2pro-accel.rules``
-```
-echo $'ENV{ACCEL_MOUNT_MATRIX}="0, -1, 0; -1, 0, 0; 0, 0, 1"' | sudo tee \
-    /etc/udev/rules.d/99-gole2pro-accel.rules
 ```
 
 ### Fix to get the internal speaker working
