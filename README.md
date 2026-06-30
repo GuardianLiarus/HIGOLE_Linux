@@ -44,7 +44,7 @@ If you are on an immutable distribution such as Fedora Silverblue or Bazzite, yo
 
 ## Wayland Setup (Touch is broken at the moment)
 
-### Fix for the inverted Touchscreen input(Currently broken, see [libinput#1303](https://gitlab.freedesktop.org/libinput/libinput/-/work_items/1303))
+### Fix for the inverted Touchscreen input(Currently broken on GNOME and KDE, see [Bug 521464](https://bugs.kde.org/show_bug.cgi?id=521464) for KDE
 Creates a udev rule ``/etc/udev/rules.d/99-gole2pro-touch.rules``
 ```
 echo $'ENV{LIBINPUT_CALIBRATION_MATRIX}="-1 0 1 0 -1 1"' | sudo tee \
